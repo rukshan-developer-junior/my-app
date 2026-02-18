@@ -56,14 +56,12 @@ export function useStarWarsPeople() {
         });
         return parsePeopleResponse(raw);
       } catch (err) {
-        const message =
-          err instanceof Error ? err.message : "Failed to load characters.";
+        const message = err instanceof Error ? err.message : "Failed to load characters.";
         throw new Error(message);
       }
     },
     initialPageParam: 1 as number | undefined,
-    getNextPageParam: (lastPage) =>
-      lastPage.next ? getPageFromNext(lastPage.next) : undefined,
+    getNextPageParam: (lastPage) => (lastPage.next ? getPageFromNext(lastPage.next) : undefined),
     enabled: isOnline,
     retry: 2,
     staleTime: 1000 * 60 * 5,
@@ -72,7 +70,7 @@ export function useStarWarsPeople() {
 
   const apiPeople = useMemo(
     () => infinite.data?.pages?.flatMap((p) => p.results) ?? [],
-    [infinite.data?.pages],
+    [infinite.data?.pages]
   );
 
   return {

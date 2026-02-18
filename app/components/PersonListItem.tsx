@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from "../constants/colors";
 import { StarWarsPerson } from "../data/StarWarsPerson";
 
@@ -19,16 +13,9 @@ function formatGender(g: string): string {
   return g.charAt(0).toUpperCase() + g.slice(1).toLowerCase();
 }
 
-export const PersonListItem = React.memo(function PersonListItem({
-  item,
-  onPress,
-}: Props) {
+export const PersonListItem = React.memo(function PersonListItem({ item, onPress }: Props) {
   return (
-    <TouchableOpacity
-      style={styles.card}
-      activeOpacity={0.7}
-      onPress={() => onPress(item)}
-    >
+    <TouchableOpacity style={styles.card} activeOpacity={0.7} onPress={() => onPress(item)}>
       <View style={styles.content}>
         <Text style={styles.name} numberOfLines={1}>
           {item.name}

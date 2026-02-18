@@ -93,7 +93,7 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
     urls: string[],
     pathPattern: RegExp,
     example: string,
-    fieldLabel: string,
+    fieldLabel: string
   ): string | null => {
     for (let i = 0; i < urls.length; i++) {
       if (!isValidResourceUrl(urls[i], pathPattern)) {
@@ -107,7 +107,7 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
     url: string,
     pathPattern: RegExp,
     example: string,
-    fieldLabel: string,
+    fieldLabel: string
   ): string | null => {
     if (!isValidResourceUrl(url, pathPattern)) {
       return `Invalid ${fieldLabel} URL. Use format: ${example}`;
@@ -177,7 +177,7 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
             ? "height"
             : err.includes("Mass must be a number")
               ? "mass"
-              : (requiredStep1.find((k) => !form[k].trim()) ?? null),
+              : (requiredStep1.find((k) => !form[k].trim()) ?? null)
         );
       }
       if (step === 2) setErrorField(requiredStep2.find((k) => !form[k].trim()) ?? null);
@@ -193,7 +193,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
     }
     if (step === 3) {
       if (form.films.trim()) {
-        const e = validateUrlList(parseCommaList(form.films), SWAPI.films.pattern, SWAPI.films.example, "film");
+        const e = validateUrlList(
+          parseCommaList(form.films),
+          SWAPI.films.pattern,
+          SWAPI.films.example,
+          "film"
+        );
         if (e) {
           setErrorMessage(e);
           setErrorField("films");
@@ -201,7 +206,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
         }
       }
       if (form.species.trim()) {
-        const e = validateUrlList(parseCommaList(form.species), SWAPI.species.pattern, SWAPI.species.example, "species");
+        const e = validateUrlList(
+          parseCommaList(form.species),
+          SWAPI.species.pattern,
+          SWAPI.species.example,
+          "species"
+        );
         if (e) {
           setErrorMessage(e);
           setErrorField("species");
@@ -209,7 +219,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
         }
       }
       if (form.vehicles.trim()) {
-        const e = validateUrlList(parseCommaList(form.vehicles), SWAPI.vehicles.pattern, SWAPI.vehicles.example, "vehicle");
+        const e = validateUrlList(
+          parseCommaList(form.vehicles),
+          SWAPI.vehicles.pattern,
+          SWAPI.vehicles.example,
+          "vehicle"
+        );
         if (e) {
           setErrorMessage(e);
           setErrorField("vehicles");
@@ -217,7 +232,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
         }
       }
       if (form.starships.trim()) {
-        const e = validateUrlList(parseCommaList(form.starships), SWAPI.starships.pattern, SWAPI.starships.example, "starship");
+        const e = validateUrlList(
+          parseCommaList(form.starships),
+          SWAPI.starships.pattern,
+          SWAPI.starships.example,
+          "starship"
+        );
         if (e) {
           setErrorMessage(e);
           setErrorField("starships");
@@ -236,12 +256,11 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
     const err = err1 ?? err2;
     if (err) {
       setErrorMessage(err);
-      const key1 =
-        err.includes("Height must be a number")
-          ? "height"
-          : err.includes("Mass must be a number")
-            ? "mass"
-            : requiredStep1.find((k) => !form[k].trim());
+      const key1 = err.includes("Height must be a number")
+        ? "height"
+        : err.includes("Mass must be a number")
+          ? "mass"
+          : requiredStep1.find((k) => !form[k].trim());
       const key2 = requiredStep2.find((k) => !form[k].trim());
       const key = key1 ?? key2 ?? null;
       setErrorField(key);
@@ -259,7 +278,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
       }
     }
     if (form.films.trim()) {
-      const e = validateUrlList(parseCommaList(form.films), SWAPI.films.pattern, SWAPI.films.example, "film");
+      const e = validateUrlList(
+        parseCommaList(form.films),
+        SWAPI.films.pattern,
+        SWAPI.films.example,
+        "film"
+      );
       if (e) {
         setErrorMessage(e);
         setErrorField("films");
@@ -268,7 +292,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
       }
     }
     if (form.species.trim()) {
-      const e = validateUrlList(parseCommaList(form.species), SWAPI.species.pattern, SWAPI.species.example, "species");
+      const e = validateUrlList(
+        parseCommaList(form.species),
+        SWAPI.species.pattern,
+        SWAPI.species.example,
+        "species"
+      );
       if (e) {
         setErrorMessage(e);
         setErrorField("species");
@@ -277,7 +306,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
       }
     }
     if (form.vehicles.trim()) {
-      const e = validateUrlList(parseCommaList(form.vehicles), SWAPI.vehicles.pattern, SWAPI.vehicles.example, "vehicle");
+      const e = validateUrlList(
+        parseCommaList(form.vehicles),
+        SWAPI.vehicles.pattern,
+        SWAPI.vehicles.example,
+        "vehicle"
+      );
       if (e) {
         setErrorMessage(e);
         setErrorField("vehicles");
@@ -286,7 +320,12 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
       }
     }
     if (form.starships.trim()) {
-      const e = validateUrlList(parseCommaList(form.starships), SWAPI.starships.pattern, SWAPI.starships.example, "starship");
+      const e = validateUrlList(
+        parseCommaList(form.starships),
+        SWAPI.starships.pattern,
+        SWAPI.starships.example,
+        "starship"
+      );
       if (e) {
         setErrorMessage(e);
         setErrorField("starships");
@@ -356,30 +395,75 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
         </View>
         <ScrollView
           style={styles.scroll}
-          contentContainerStyle={[
-            styles.scrollContent,
-            { paddingBottom: 32 + insets.bottom },
-          ]}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 32 + insets.bottom }]}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
           {step === 1 && (
             <>
               <Text style={styles.stepTitle}>Basic info</Text>
-              <FormField label="Name *" value={form.name} onChange={update("name")} placeholder="Enter name" error={errorField === "name" ? errorMessage : undefined} />
-              <FormField label="Height *" value={form.height} onChange={update("height")} error={errorField === "height" ? errorMessage : undefined} />
-              <FormField label="Mass *" value={form.mass} onChange={update("mass")} error={errorField === "mass" ? errorMessage : undefined} />
-              <FormField label="Birth year *" value={form.birth_year} onChange={update("birth_year")} placeholder="e.g. 19BBY" error={errorField === "birth_year" ? errorMessage : undefined} />
-              <FormField label="Gender *" value={form.gender} onChange={update("gender")} error={errorField === "gender" ? errorMessage : undefined} />
+              <FormField
+                label="Name *"
+                value={form.name}
+                onChange={update("name")}
+                placeholder="Enter name"
+                error={errorField === "name" ? errorMessage : undefined}
+              />
+              <FormField
+                label="Height *"
+                value={form.height}
+                onChange={update("height")}
+                error={errorField === "height" ? errorMessage : undefined}
+              />
+              <FormField
+                label="Mass *"
+                value={form.mass}
+                onChange={update("mass")}
+                error={errorField === "mass" ? errorMessage : undefined}
+              />
+              <FormField
+                label="Birth year *"
+                value={form.birth_year}
+                onChange={update("birth_year")}
+                placeholder="e.g. 19BBY"
+                error={errorField === "birth_year" ? errorMessage : undefined}
+              />
+              <FormField
+                label="Gender *"
+                value={form.gender}
+                onChange={update("gender")}
+                error={errorField === "gender" ? errorMessage : undefined}
+              />
             </>
           )}
           {step === 2 && (
             <>
               <Text style={styles.stepTitle}>Appearance & homeworld</Text>
-              <FormField label="Hair color *" value={form.hair_color} onChange={update("hair_color")} error={errorField === "hair_color" ? errorMessage : undefined} />
-              <FormField label="Skin color *" value={form.skin_color} onChange={update("skin_color")} error={errorField === "skin_color" ? errorMessage : undefined} />
-              <FormField label="Eye color *" value={form.eye_color} onChange={update("eye_color")} error={errorField === "eye_color" ? errorMessage : undefined} />
-              <FormField label="Homeworld *" value={form.homeworld} onChange={update("homeworld")} placeholder="https://swapi.dev/api/planets/1/" error={errorField === "homeworld" ? errorMessage : undefined} />
+              <FormField
+                label="Hair color *"
+                value={form.hair_color}
+                onChange={update("hair_color")}
+                error={errorField === "hair_color" ? errorMessage : undefined}
+              />
+              <FormField
+                label="Skin color *"
+                value={form.skin_color}
+                onChange={update("skin_color")}
+                error={errorField === "skin_color" ? errorMessage : undefined}
+              />
+              <FormField
+                label="Eye color *"
+                value={form.eye_color}
+                onChange={update("eye_color")}
+                error={errorField === "eye_color" ? errorMessage : undefined}
+              />
+              <FormField
+                label="Homeworld *"
+                value={form.homeworld}
+                onChange={update("homeworld")}
+                placeholder="https://swapi.dev/api/planets/1/"
+                error={errorField === "homeworld" ? errorMessage : undefined}
+              />
             </>
           )}
           {step === 3 && (
@@ -424,9 +508,7 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
                 onChange={update("url")}
                 placeholder="Optional, auto-generated if empty"
               />
-              {errorMessage ? (
-                <Text style={styles.errorText}>{errorMessage}</Text>
-              ) : null}
+              {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
             </>
           )}
         </ScrollView>
@@ -447,11 +529,7 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
             <View style={styles.backButton} />
           )}
           {step < TOTAL_STEPS ? (
-            <TouchableOpacity
-              style={styles.nextButton}
-              onPress={handleNext}
-              activeOpacity={0.8}
-            >
+            <TouchableOpacity style={styles.nextButton} onPress={handleNext} activeOpacity={0.8}>
               <Text style={styles.nextButtonText}>Next</Text>
             </TouchableOpacity>
           ) : (
@@ -461,9 +539,7 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
               activeOpacity={0.8}
               disabled={saving}
             >
-              <Text style={styles.nextButtonText}>
-                {saving ? "Saving…" : "Save"}
-              </Text>
+              <Text style={styles.nextButtonText}>{saving ? "Saving…" : "Save"}</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -489,9 +565,7 @@ function FormField({
     <View style={styles.field}>
       <View style={styles.fieldLabelRow}>
         <Text style={styles.fieldLabel}>{label}</Text>
-        {error ? (
-          <Text style={styles.fieldErrorText}>{error}</Text>
-        ) : null}
+        {error ? <Text style={styles.fieldErrorText}>{error}</Text> : null}
       </View>
       <TextInput
         style={styles.input}

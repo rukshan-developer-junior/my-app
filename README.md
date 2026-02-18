@@ -4,19 +4,20 @@ A React Native (Expo) app that lists Star Wars characters from the [SWAPI](https
 
 ## Frameworks & libraries
 
-| Category | Choice | Why we use it |
-|----------|--------|----------------|
-| **App framework** | [Expo](https://expo.dev) | Single codebase for iOS, Android, and web; managed tooling (builds, OTA), and a rich set of native modules without ejecting. |
-| **UI / runtime** | React 19 + React Native | Component-based UI, shared logic with the web ecosystem, and native performance via the RN bridge. |
-| **Navigation** | [React Navigation](https://reactnavigation.org/) (native-stack) | Declarative, native-feel navigation (stack, modals) and deep linking; widely used and well documented. |
-| **Server state** | [TanStack Query](https://tanstack.com/query/latest) (React Query) | Caching, loading/error states, refetch, and **infinite queries** for paginated lists; keeps server data out of Redux and avoids manual cache logic. |
-| **Client state** | [Redux Toolkit](https://redux-toolkit.js.org/) + [redux-persist](https://github.com/rt2zz/redux-persist) | Predictable global state for “added” characters and a simple way to **persist** that state to AsyncStorage so it survives app restarts. |
-| **HTTP** | [Axios](https://axios-http.com/) | Clear API (interceptors, typed responses), timeouts, and request/response logging for the SWAPI client. |
-| **Connectivity** | [@react-native-community/netinfo](https://github.com/react-native-community/netinfo) | Detect online/offline so we can disable or refetch API calls when the device has no network. |
-| **Safe areas** | [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) | Correct insets for notches and home indicators so list, detail, and modals don’t sit under system UI. |
+| Category          | Choice                                                                                                   | Why we use it                                                                                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **App framework** | [Expo](https://expo.dev)                                                                                 | Single codebase for iOS, Android, and web; managed tooling (builds, OTA), and a rich set of native modules without ejecting.                        |
+| **UI / runtime**  | React 19 + React Native                                                                                  | Component-based UI, shared logic with the web ecosystem, and native performance via the RN bridge.                                                  |
+| **Navigation**    | [React Navigation](https://reactnavigation.org/) (native-stack)                                          | Declarative, native-feel navigation (stack, modals) and deep linking; widely used and well documented.                                              |
+| **Server state**  | [TanStack Query](https://tanstack.com/query/latest) (React Query)                                        | Caching, loading/error states, refetch, and **infinite queries** for paginated lists; keeps server data out of Redux and avoids manual cache logic. |
+| **Client state**  | [Redux Toolkit](https://redux-toolkit.js.org/) + [redux-persist](https://github.com/rt2zz/redux-persist) | Predictable global state for “added” characters and a simple way to **persist** that state to AsyncStorage so it survives app restarts.             |
+| **HTTP**          | [Axios](https://axios-http.com/)                                                                         | Clear API (interceptors, typed responses), timeouts, and request/response logging for the SWAPI client.                                             |
+| **Connectivity**  | [@react-native-community/netinfo](https://github.com/react-native-community/netinfo)                     | Detect online/offline so we can disable or refetch API calls when the device has no network.                                                        |
+| **Safe areas**    | [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context)            | Correct insets for notches and home indicators so list, detail, and modals don’t sit under system UI.                                               |
 
-**Why both React Query and Redux?**  
-- **React Query** holds **server state**: the paginated list from the API. It handles loading, errors, refetch, and “load more” without storing that list in Redux.  
+**Why both React Query and Redux?**
+
+- **React Query** holds **server state**: the paginated list from the API. It handles loading, errors, refetch, and “load more” without storing that list in Redux.
 - **Redux** holds **client state**: the list of characters added by the user (e.g. from the “Add person” flow). That list is persisted and merged with the API list in the UI. Keeping server and client state separate keeps the app simpler and avoids duplicating API data in Redux.
 
 ## Get started
@@ -36,7 +37,6 @@ A React Native (Expo) app that lists Star Wars characters from the [SWAPI](https
 3. Run the app
 
    After the dev server starts, run the app on a device or simulator:
-
    - **iOS simulator:** Press `i` in the terminal, or run `npm run ios`
    - **Android emulator:** Press `a` in the terminal, or run `npm run android`
    - **Expo Go (physical device):** Scan the QR code with the Expo Go app ([iOS](https://apps.apple.com/app/expo-go/id982107779) / [Android](https://play.google.com/store/apps/details?id=host.exp.exponent))

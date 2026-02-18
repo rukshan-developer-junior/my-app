@@ -18,10 +18,7 @@ export type StarWarsDetailParams = {
   person: StarWarsPerson;
 };
 
-type Props = NativeStackScreenProps<
-  { StarWarsDetail: StarWarsDetailParams },
-  "StarWarsDetail"
->;
+type Props = NativeStackScreenProps<{ StarWarsDetail: StarWarsDetailParams }, "StarWarsDetail">;
 
 function formatLabel(s: string): string {
   if (!s || s === "n/a") return "N/A";
@@ -30,19 +27,18 @@ function formatLabel(s: string): string {
 
 function getErrorMessage(err: unknown): string {
   if (err instanceof Error) return err.message;
-  if (typeof err === "object" && err != null && "message" in err && typeof (err as { message: unknown }).message === "string") {
+  if (
+    typeof err === "object" &&
+    err != null &&
+    "message" in err &&
+    typeof (err as { message: unknown }).message === "string"
+  ) {
     return (err as { message: string }).message;
   }
   return "Something went wrong.";
 }
 
-function DetailRow({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | undefined;
-}) {
+function DetailRow({ label, value }: { label: string; value: string | undefined }) {
   if (value == null || value === "") return null;
   return (
     <View style={styles.row}>
@@ -56,7 +52,12 @@ export default function StarWarsDetailScreen({ route }: Props) {
   const insets = useSafeAreaInsets();
   const person = route.params?.person;
   const filmUrls = person?.films ?? [];
-  const { films, isLoading: filmsLoading, error: filmsError, refetchAll: refetchFilms } = useFilms(filmUrls);
+  const {
+    films,
+    isLoading: filmsLoading,
+    error: filmsError,
+    refetchAll: refetchFilms,
+  } = useFilms(filmUrls);
 
   const safeArea = {
     paddingTop: insets.top + 8,
@@ -109,9 +110,7 @@ export default function StarWarsDetailScreen({ route }: Props) {
             <ActivityIndicator size="small" color={colors.primary} style={styles.filmsLoader} />
           ) : filmsError ? (
             <View style={styles.filmsErrorWrap}>
-              <Text style={styles.errorText}>
-                {getErrorMessage(filmsError)}
-              </Text>
+              <Text style={styles.errorText}>{getErrorMessage(filmsError)}</Text>
               <TouchableOpacity
                 style={styles.retryButton}
                 onPress={() => refetchFilms()}

@@ -2,9 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 import Constants from "expo-constants";
 const BASE_URL =
-  Constants.expoConfig?.extra?.EXPO_PUBLIC_BASE_URL ||
-  process.env.EXPO_PUBLIC_BASE_URL ||
-  "";
+  Constants.expoConfig?.extra?.EXPO_PUBLIC_BASE_URL || process.env.EXPO_PUBLIC_BASE_URL || "";
 
 export interface HttpOptions {
   token?: string;
@@ -48,7 +46,7 @@ http.interceptors.request.use(
   (error) => {
     console.log("[HTTP REQUEST ERROR]", error);
     return Promise.reject(error);
-  },
+  }
 );
 
 // Log all responses
@@ -72,7 +70,7 @@ http.interceptors.response.use(
       console.log("[HTTP RESPONSE ERROR]", error);
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 const attachAuth = (headers: Record<string, string> = {}, token?: string) => {
@@ -85,17 +83,13 @@ const attachAuth = (headers: Record<string, string> = {}, token?: string) => {
 const handleHttpError = (error: unknown): HttpError => {
   if (axios.isAxiosError(error)) {
     const status = error.response?.status;
-    const message =
-      error.response?.data?.message || error.message || "HTTP Error";
+    const message = error.response?.data?.message || error.message || "HTTP Error";
     return { status, message };
   }
   return { message: "Unknown error" };
 };
 
-export const httpGet = async <T = any>(
-  url: string,
-  options: HttpOptions = {},
-): Promise<T> => {
+export const httpGet = async <T = any>(url: string, options: HttpOptions = {}): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await http.get(url, {
       params: options.params,
@@ -110,7 +104,7 @@ export const httpGet = async <T = any>(
 export const httpPost = async <T = any>(
   url: string,
   data?: any,
-  options: HttpOptions = {},
+  options: HttpOptions = {}
 ): Promise<T> => {
   if (options.dummySuccess) {
     const err = new Error("Not Found") as Error & { status?: number };
@@ -130,7 +124,7 @@ export const httpPost = async <T = any>(
 export const httpPatch = async <T = any>(
   url: string,
   data?: any,
-  options: HttpOptions = {},
+  options: HttpOptions = {}
 ): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await http.patch(url, data, {
@@ -142,10 +136,7 @@ export const httpPatch = async <T = any>(
   }
 };
 
-export const httpDelete = async <T = any>(
-  url: string,
-  options: HttpOptions = {},
-): Promise<T> => {
+export const httpDelete = async <T = any>(url: string, options: HttpOptions = {}): Promise<T> => {
   try {
     const response: AxiosResponse<T> = await http.delete(url, {
       data: options.data,

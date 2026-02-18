@@ -16,4 +16,3 @@ export interface StarWarsPerson {
   edited: string;
   url: string;
 }
-

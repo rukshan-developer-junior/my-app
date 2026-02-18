@@ -51,9 +51,7 @@ export default function StarWarsListScreen({ navigation }: any) {
     hasNextPage,
   } = useStarWarsPeople();
   // Redux: people saved via the modal (persisted)
-  const addedPeopleFromRedux = useSelector(
-    (state: RootState) => state.addedPeople.list,
-  );
+  const addedPeopleFromRedux = useSelector((state: RootState) => state.addedPeople.list);
   const [search, setSearch] = useState("");
   const [genderFilter, setGenderFilter] = useState<string>("");
   const [modalVisible, setModalVisible] = useState(false);
@@ -63,7 +61,7 @@ export default function StarWarsListScreen({ navigation }: any) {
   // Combine both: Redux (modal-saved) at top, then API data
   const people: StarWarsPerson[] = useMemo(
     () => [...addedPeopleFromRedux, ...(apiPeople ?? [])],
-    [addedPeopleFromRedux, apiPeople],
+    [addedPeopleFromRedux, apiPeople]
   );
 
   // Unique genders from data for chips (All + sorted unique values)
@@ -76,14 +74,10 @@ export default function StarWarsListScreen({ navigation }: any) {
   const filtered = useMemo(() => {
     let list = people;
     if (search.trim()) {
-      list = list.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()),
-      );
+      list = list.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
     }
     if (genderFilter) {
-      list = list.filter(
-        (item) => item.gender.toLowerCase() === genderFilter.toLowerCase(),
-      );
+      list = list.filter((item) => item.gender.toLowerCase() === genderFilter.toLowerCase());
     }
     return list;
   }, [search, genderFilter, people]);
@@ -92,14 +86,12 @@ export default function StarWarsListScreen({ navigation }: any) {
     (person: StarWarsPerson) => {
       navigation.navigate("StarWarsDetail", { person });
     },
-    [navigation],
+    [navigation]
   );
 
   const renderItem: ListRenderItem<StarWarsPerson> = useCallback(
-    ({ item }) => (
-      <PersonListItem item={item} onPress={handlePersonPress} />
-    ),
-    [handlePersonPress],
+    ({ item }) => <PersonListItem item={item} onPress={handlePersonPress} />,
+    [handlePersonPress]
   );
 
   const getItemLayout = useCallback(
@@ -108,24 +100,21 @@ export default function StarWarsListScreen({ navigation }: any) {
       offset: ITEM_HEIGHT * index,
       index,
     }),
-    [],
+    []
   );
 
   const keyExtractor = useCallback(
     (item: StarWarsPerson, index: number) => item.url || `person-${index}`,
-    [],
+    []
   );
-  const ItemSeparator = useMemo(
-    () => () => <View style={styles.separator} />,
-    [],
-  );
+  const ItemSeparator = useMemo(() => () => <View style={styles.separator} />, []);
   const ListEmpty = useMemo(
     () => (
       <View style={styles.emptyWrap}>
         <Text style={styles.emptyText}>No results found.</Text>
       </View>
     ),
-    [],
+    []
   );
 
   const handleEndReached = useCallback(() => {
@@ -143,9 +132,7 @@ export default function StarWarsListScreen({ navigation }: any) {
     if (error && people.length > 0) {
       return (
         <View style={styles.footerError}>
-          <Text style={styles.footerErrorText}>
-            {error?.message || "Couldn’t load more."}
-          </Text>
+          <Text style={styles.footerErrorText}>{error?.message || "Couldn’t load more."}</Text>
           <TouchableOpacity
             style={styles.footerRetryButton}
             onPress={() => refetch()}
@@ -247,10 +234,7 @@ export default function StarWarsListScreen({ navigation }: any) {
               activeOpacity={0.7}
             >
               <Text
-                style={[
-                  styles.chipText,
-                  selected && styles.chipTextSelected,
-                ]}
+                style={[styles.chipText, selected && styles.chipTextSelected]}
                 numberOfLines={1}
               >
                 {genderChipLabel(value)}
@@ -268,10 +252,7 @@ export default function StarWarsListScreen({ navigation }: any) {
         maxToRenderPerBatch={MAX_TO_RENDER_PER_BATCH}
         windowSize={WINDOW_SIZE}
         removeClippedSubviews={Platform.OS === "android"}
-        contentContainerStyle={[
-          styles.listContent,
-          { paddingBottom: 120 + insets.bottom },
-        ]}
+        contentContainerStyle={[styles.listContent, { paddingBottom: 120 + insets.bottom }]}
         ItemSeparatorComponent={ItemSeparator}
         ListEmptyComponent={ListEmpty}
         ListFooterComponent={ListFooter}
@@ -310,9 +291,7 @@ export default function StarWarsListScreen({ navigation }: any) {
             }
             return {
               success: false as const,
-              error:
-                message ||
-                "Failed to save. Please check your connection and try again.",
+              error: message || "Failed to save. Please check your connection and try again.",
             };
           }
         }}

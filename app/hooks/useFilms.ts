@@ -13,9 +13,7 @@ export function useFilms(filmUrls: string[]) {
   });
 
   const films = useMemo(() => {
-    return results
-      .filter((r) => r.data != null)
-      .map((r) => r.data as StarWarsFilm);
+    return results.filter((r) => r.data != null).map((r) => r.data as StarWarsFilm);
   }, [results]);
 
   const isLoading = results.some((r) => r.isLoading);
