@@ -348,7 +348,7 @@ export function AddPersonModal({ visible, onClose, onSave }: Props) {
       >
         <View style={styles.header}>
           <Text style={styles.title}>
-            Add people — Step {step} of {TOTAL_STEPS}
+            Add person — Step {step} of {TOTAL_STEPS}
           </Text>
           <TouchableOpacity onPress={onClose} hitSlop={12}>
             <Text style={styles.cancel}>Cancel</Text>
